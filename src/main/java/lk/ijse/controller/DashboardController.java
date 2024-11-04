@@ -1,5 +1,6 @@
 package lk.ijse.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.entity.UserSession;
 
 import java.io.IOException;
 
@@ -19,6 +21,19 @@ public class DashboardController {
 
     @FXML
     private AnchorPane rootNode;
+
+
+    @FXML
+    private JFXButton btnDashboard;
+
+    @FXML
+    private JFXButton btnUser;
+
+    @FXML
+    private JFXButton btnPrograms;
+
+    int userId = UserSession.getInstance().getUserId();
+    String role = UserSession.getInstance().getRole();
 
 
     // Initialize method to load the main dashboard after a delay
@@ -32,7 +47,20 @@ public class DashboardController {
 
         // Set action listeners for each button in the VBox
 //        setButtonActions();
+
+
+        checkLoggedUser();
     }
+
+
+    void checkLoggedUser() {
+        if (role.equals("admissions coordinator")){
+            btnUser.setVisible(false);
+            btnPrograms.setVisible(false);
+        }
+    }
+
+
 
     // Method to load the main dashboard
     private void loadMainDashboard() {
