@@ -27,6 +27,7 @@ public class LoginDAOImpl implements LoginDAO {
 
             if (user != null) {
                 if (BCrypt.checkpw(login.getPassword(), user.getPassword())) {
+
                     // Store userId and role in Session singleton
                     session = SessionFactoryConfiguration.getInstance().getSession();
                     UserSession.getInstance().setUser(user.getUserId(), user.getRole());
