@@ -30,12 +30,12 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public int generateNewID() throws SQLException, ClassNotFoundException {
-        return 0;
+    public String generateNewID() throws SQLException, ClassNotFoundException {
+        return String.valueOf(0);
     }
 
     @Override
-    public boolean delete(int id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
         return false;
     }
 

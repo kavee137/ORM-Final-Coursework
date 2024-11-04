@@ -17,8 +17,8 @@
             <Font name="Al Nile Bold" size="27.0" />
          </font>
       </Text>
-      <TextField fx:id="txtProgramName" layoutX="388.0" layoutY="138.0" prefHeight="33.0" prefWidth="235.0" promptText="Program name" />
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="422.0" layoutY="254.0" onAction="#btnSaveOnAction" prefHeight="10.0" prefWidth="50.0" style="-fx-background-color: #119822;" text="Save" textFill="WHITE">
+      <TextField fx:id="txtProgramName" layoutX="388.0" layoutY="138.0" onKeyReleased="#nameKeyRelaseAction" prefHeight="33.0" prefWidth="235.0" promptText="Program name" />
+      <JFXButton fx:id="btnProgramSave" buttonType="RAISED" contentDisplay="RIGHT" layoutX="422.0" layoutY="254.0" onAction="#btnSaveOnAction" prefHeight="10.0" prefWidth="50.0" style="-fx-background-color: #119822;" text="Save" textFill="WHITE">
          <font>
             <Font name="System Italic" size="11.0" />
          </font>
@@ -26,7 +26,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="359.0" layoutY="254.0" onAction="#btnUpdateOnAction" prefHeight="10.0" prefWidth="50.0" style="-fx-background-color: #db7c26;" text="Update" textFill="WHITE">
+      <JFXButton fx:id="btnProgramUpdate" buttonType="RAISED" contentDisplay="RIGHT" layoutX="359.0" layoutY="254.0" onAction="#btnUpdateOnAction" prefHeight="10.0" prefWidth="50.0" style="-fx-background-color: #db7c26;" text="Update" textFill="WHITE">
          <font>
             <Font name="System Italic" size="11.0" />
          </font>
@@ -34,7 +34,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="294.0" layoutY="254.0" onAction="#btnDeleteOnAction" prefHeight="10.0" prefWidth="50.0" style="-fx-background-color: #e74c3c;" text="Delete" textFill="WHITE">
+      <JFXButton fx:id="btnProgramDelete" buttonType="RAISED" contentDisplay="RIGHT" layoutX="294.0" layoutY="254.0" onAction="#btnDeleteOnAction" prefHeight="10.0" prefWidth="50.0" style="-fx-background-color: #e74c3c;" text="Delete" textFill="WHITE">
          <font>
             <Font name="System Italic" size="11.0" />
          </font>
@@ -50,29 +50,25 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <TextField fx:id="txtProgramFee" layoutX="387.0" layoutY="178.0" prefHeight="33.0" prefWidth="235.0" promptText="Fee" />
-      <TextField fx:id="txtProgramDuration" layoutX="76.0" layoutY="179.0" prefHeight="33.0" prefWidth="236.0" promptText="Duration" />
-      <Label layoutX="39.0" layoutY="139.0" text="ID:">
+      <TextField fx:id="txtProgramFee" layoutX="387.0" layoutY="178.0" onKeyReleased="#feeKeyRelaseAction" prefHeight="33.0" prefWidth="235.0" promptText="Fee" />
+      <TextField fx:id="txtProgramDuration" layoutX="76.0" layoutY="179.0" onKeyReleased="#durationKeyRelaseAction" prefHeight="33.0" prefWidth="236.0" promptText="Duration" />
+      <Label layoutX="79.0" layoutY="139.0" text="ID:">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
       <TableView fx:id="tblProgram" layoutX="55.0" layoutY="310.0" prefHeight="332.0" prefWidth="556.0">
          <columns>
-            <TableColumn fx:id="colId" prefWidth="44.0" text="ID" />
-            <TableColumn fx:id="colName" prefWidth="247.4877166748047" text="Program name" />
+            <TableColumn fx:id="colId" prefWidth="63.0" text="ID" />
+            <TableColumn fx:id="colName" prefWidth="228.5" text="Program name" />
             <TableColumn fx:id="colDuration" prefWidth="171.51226806640625" text="Duration" />
             <TableColumn fx:id="colFee" prefWidth="92.0" text="Fee (LKR)" />
          </columns>
       </TableView>
-      <TextField fx:id="txtProgramID" layoutX="76.0" layoutY="135.0" prefHeight="33.0" prefWidth="236.0" promptText="ID" />
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="253.0" layoutY="141.0" onAction="#btnSearchOnAction" prefHeight="21.0" prefWidth="52.0" style="-fx-background-color: gray;" text="Search" textFill="WHITE">
+      <Label fx:id="lblProgramId" layoutX="119.0" layoutY="139.0">
          <font>
-            <Font name="System Bold" size="9.0" />
+            <Font name="System Bold" size="19.0" />
          </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
+      </Label>
    </children>
 </AnchorPane>

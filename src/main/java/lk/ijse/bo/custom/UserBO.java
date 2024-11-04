@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface UserBO extends SuperBO {
 
-    int generateNewID() throws SQLException, ClassNotFoundException;
+    String generateNewID() throws SQLException, ClassNotFoundException;
 
     public boolean saveUser(UserDTO dto) throws SQLException, ClassNotFoundException;
 

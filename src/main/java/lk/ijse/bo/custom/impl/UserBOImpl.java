@@ -31,7 +31,7 @@ public class UserBOImpl implements UserBO {
     }
 
     @Override
-    public int generateNewID() throws SQLException, ClassNotFoundException {
+    public String generateNewID() throws SQLException, ClassNotFoundException {
         return userDAO.generateNewID();
     }
 
@@ -42,7 +42,7 @@ public class UserBOImpl implements UserBO {
 
     @Override
     public boolean deleteUser(int id) throws SQLException, ClassNotFoundException {
-        return userDAO.delete(id);
+        return userDAO.delete(String.valueOf(id));
     }
 
 

@@ -12,7 +12,7 @@ public class BOFactory {
     }
 
     public enum BOTypes{
-        STUDENT,USER,LOGIN
+        STUDENT,USER,LOGIN,PROGRAM
     }
 
     //Object creation logic for BO objects
@@ -24,6 +24,8 @@ public class BOFactory {
                 return new UserBOImpl();
             case LOGIN:
                 return new LoginBOImpl();
+            case PROGRAM:
+                return new ProgramBOImpl();
             default:
                 return null;
         }

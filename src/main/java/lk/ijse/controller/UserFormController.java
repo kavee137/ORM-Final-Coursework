@@ -132,7 +132,7 @@ public class UserFormController {
 
     private void generateNewUserID() {
         try {
-            int nextUserId = userBO.generateNewID();
+            String nextUserId = userBO.generateNewID();
 
             lblUserId.setText(String.valueOf(nextUserId));
         } catch (SQLException | ClassNotFoundException e) {

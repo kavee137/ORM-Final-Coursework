@@ -8,7 +8,6 @@ import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +64,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public int generateNewID() throws SQLException, ClassNotFoundException {
+    public String generateNewID() throws SQLException, ClassNotFoundException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
 
         try {
@@ -77,9 +76,9 @@ public class UserDAOImpl implements UserDAO {
 
             // Check if lastId is null, which happens if there are no entries in the database
             if (lastId == null) {
-                return 1; // Start from ID 1 if no users exist
+                return String.valueOf(1); // Start from ID 1 if no users exist
             } else {
-                return lastId + 1; // Increment the last ID by 1 if it exists
+                return String.valueOf(lastId + 1); // Increment the last ID by 1 if it exists
             }
         } finally {
             session.close();
@@ -89,7 +88,7 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    public boolean delete(int id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         NativeQuery query = session.createNativeQuery("delete from user where userId = ?1");

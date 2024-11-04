@@ -41,6 +41,7 @@ public class LoginFormController {
 
     void clickEnterButtonMoveCursor() {
         txtUserName.setOnAction(event -> txtPassword.requestFocus());
+        txtPassword.setOnAction(event -> btnLoginOnAction(new ActionEvent()));
     }
 
     @FXML
