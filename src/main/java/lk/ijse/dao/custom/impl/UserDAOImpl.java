@@ -40,6 +40,9 @@ public class UserDAOImpl implements UserDAO {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
+
+        System.out.println(user.getRole());
+
         session.save(user);
         transaction.commit();
         session.close();

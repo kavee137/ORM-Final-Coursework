@@ -12,7 +12,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.bo.BOFactory;
 import lk.ijse.bo.custom.LoginBO;
+import lk.ijse.config.SessionFactoryConfiguration;
 import lk.ijse.dto.LoginDTO;
+import lk.ijse.entity.UserSession;
+import org.hibernate.Session;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -29,6 +32,10 @@ public class LoginFormController {
     private TextField txtUserName;
 
 
+    String temporaryUserName = "admin";
+    String temporaryPassword = "admin";
+
+
     LoginBO loginBO  = (LoginBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.LOGIN);
 
 
@@ -41,28 +48,48 @@ public class LoginFormController {
 
     void clickEnterButtonMoveCursor() {
         txtUserName.setOnAction(event -> txtPassword.requestFocus());
-        txtPassword.setOnAction(event -> btnLoginOnAction(new ActionEvent()));
+        txtPassword.setOnAction(event -> {
+            try {
+                btnLoginOnAction(new ActionEvent());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @FXML
-    void btnLoginOnAction(ActionEvent event) {
+    void btnLoginOnAction(ActionEvent event) throws IOException {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
+
         String userName= txtUserName.getText();
         String password = txtPassword.getText();
 
         try {
-            LoginDTO loginDTO = new LoginDTO(userName, password);
+            if (userName.equals(temporaryUserName)  && password.equals(temporaryPassword)) {
+                /*methana krala thinne wena kenekge pc ekakata me system eka dammothi mulin DB ekk nathi
+                  nisa tempory login details tikak dila manual user id ekakui role ekakui dapu eka*/
 
-            boolean loginResult = loginBO.checkCredential(loginDTO);
-            if (loginResult) {
+                // Store userId and role in Session singleton
+                session = SessionFactoryConfiguration.getInstance().getSession();
+                UserSession.getInstance().setUser(123, "admin");
 
                 navigateToTheDashboard((Stage) rootNode.getScene().getWindow());
 
             } else {
-                // Show alert if credentials are incorrect
-                new Alert(Alert.AlertType.ERROR, "Invalid credentials! Please try again.").show();
+                LoginDTO loginDTO = new LoginDTO(userName, password);
+
+                boolean loginResult = loginBO.checkCredential(loginDTO);
+                if (loginResult) {
+                    navigateToTheDashboard((Stage) rootNode.getScene().getWindow());
+
+                } else {
+                    // Show alert if credentials are incorrect
+                    new Alert(Alert.AlertType.ERROR, "Invalid credentials! Please try again.").show();
+                }
             }
-        } catch (SQLException | IOException | ClassNotFoundException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+
+        } catch (IOException | SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -77,10 +104,6 @@ public class LoginFormController {
         stage = (Stage) rootNode.getScene().getWindow();
         stage.setTitle("Dashboard");
     }
-
-
-
-
 
 
     @FXML

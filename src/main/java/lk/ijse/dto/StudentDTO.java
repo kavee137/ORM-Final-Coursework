@@ -16,5 +16,12 @@ public class StudentDTO {
     private String address;
     private String phone;
     private Date regDate;
-    private User user;
+    private int user;
+
+    public StudentDTO(int id, String name, String address, String tel) {
+        this.studentId = id;
+        this.name = name;
+        this.address = address;
+        this.phone = tel;
+    }
 }

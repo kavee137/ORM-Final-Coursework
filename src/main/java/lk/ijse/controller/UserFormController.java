@@ -185,7 +185,6 @@ public class UserFormController {
         // Create a UserDTO with the hashed password
         UserDTO userDTO = new UserDTO(id, userName, hashedPassword, role);
 
-
         if (userName.isEmpty() || password.isEmpty() || hashedPassword.isEmpty() || cmbUserRole.getValue() == null) {
             new Alert(Alert.AlertType.ERROR, "Please fill all fields").show();
         } else {

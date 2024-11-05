@@ -1,5 +1,6 @@
 package lk.ijse.tdm;
 
+import lk.ijse.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,4 +18,5 @@ public class StudentTm {
     private String address;
     private String phoneNumber;
     private Date registerDate;
+    private int userId;
 }

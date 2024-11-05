@@ -2,6 +2,7 @@ package lk.ijse.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -26,13 +27,17 @@ public class User {
     @Column(name = "role", length = 200)
     private String role;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Student student;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Student> students;
 
     public User(int userId, String username, String password, String role) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public User(int userId) {
+        this.userId = userId;
     }
 }
