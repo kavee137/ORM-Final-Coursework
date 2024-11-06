@@ -23,8 +23,12 @@ public class Regex {
                 break;
             case TEL:
                 field = "^\\d{10}$";
+            case INTID:
+                field = "^\\d+$";
                 break;
         }
+
+
 
         Pattern pattern = Pattern.compile(field);
 

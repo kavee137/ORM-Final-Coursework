@@ -6,6 +6,7 @@ import lk.ijse.entity.Student;
 import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
@@ -21,14 +22,14 @@ public class StudentDAOImpl implements StudentDAO {
 
         try {
             // HQL query to fetch all students
-            Query<Student> query = session.createQuery("FROM Student");
+            Query<Student> query = session.createQuery("FROM Student", Student.class);
 
             // Fetch result list from query
-            List<Student> studentList = query.list();
+            ArrayList<Student> studentList = (ArrayList<Student>) query.list();
 
             System.out.println(studentList);
             // Convert List to ArrayList (if needed)
-            return new ArrayList<>(studentList);
+            return studentList;
 
         } finally {
             session.close(); // Always close the session after use
@@ -86,11 +87,48 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        NativeQuery query = session.createNativeQuery("delete from Students where studentId = ?1");
+        query.setParameter(1, id);
+        query.executeUpdate();
+
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
     public Student search(Object... args) throws SQLException, ClassNotFoundException {
-        return null;
+        Student student = null;
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = SessionFactoryConfiguration.getInstance().getSession();
+            transaction = session.beginTransaction();
+
+            // Extracting the first argument as studentId
+            int studentId = (int) args[0];  // Assuming the first argument is an integer studentId
+
+            System.out.println("Searching for student with ID: " + studentId);
+
+            Query<Student> query = session.createQuery("FROM Student WHERE studentId = :studentId", Student.class);
+            query.setParameter("studentId", studentId);
+
+            student = query.uniqueResult();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return student;
     }
 }
