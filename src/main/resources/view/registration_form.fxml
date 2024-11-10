@@ -23,7 +23,10 @@
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblRegistrationId" layoutX="143.0" layoutY="109.0" prefHeight="17.0" prefWidth="85.0" />
+      <Label fx:id="lblRegistrationId" layoutX="143.0" layoutY="109.0" prefHeight="17.0" prefWidth="85.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
       <Label layoutX="39.0" layoutY="148.0" text="Student ID:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
@@ -40,25 +43,37 @@
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblProgramId" layoutX="550.0" layoutY="189.0" prefHeight="17.0" prefWidth="85.0" />
+      <Label fx:id="lblProgramId" layoutX="550.0" layoutY="189.0" prefHeight="17.0" prefWidth="85.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
       <Label layoutX="500.0" layoutY="108.0" text="Date:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblDate" layoutX="543.0" layoutY="109.0" prefHeight="17.0" prefWidth="85.0" />
+      <Label fx:id="lblDate" layoutX="549.0" layoutY="109.0" prefHeight="17.0" prefWidth="85.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
       <Label layoutX="449.0" layoutY="147.0" text="Student name:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblStudentName" layoutX="543.0" layoutY="148.0" prefHeight="17.0" prefWidth="85.0" />
+      <Label fx:id="lblStudentName" layoutX="549.0" layoutY="148.0" prefHeight="17.0" prefWidth="85.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
       <Label layoutX="277.0" layoutY="238.0" text="Fee:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblFee" layoutX="322.0" layoutY="239.0" prefHeight="17.0" prefWidth="85.0" />
+      <Label fx:id="lblFee" layoutX="322.0" layoutY="239.0" prefHeight="17.0" prefWidth="85.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
       <TableView fx:id="tblRegistration" layoutX="17.0" layoutY="343.0" prefHeight="306.0" prefWidth="635.0">
          <columns>
             <TableColumn fx:id="colRegId" prefWidth="42.849830627441406" text="Reg ID" />
@@ -75,14 +90,17 @@
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblProgramDuration" layoutX="548.0" layoutY="239.0" prefHeight="17.0" prefWidth="85.0" />
+      <Label fx:id="lblProgramDuration" layoutX="548.0" layoutY="239.0" prefHeight="17.0" prefWidth="85.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
       <Label layoutX="40.0" layoutY="239.0" text="Payment:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtFirstPayment" layoutX="107.0" layoutY="235.0" prefHeight="16.0" prefWidth="131.0" promptText="Payment" />
-      <TextField fx:id="txtStudentId" layoutX="139.0" layoutY="146.0" prefHeight="26.0" prefWidth="212.0" promptText="ID" />
+      <TextField fx:id="txtFirstPayment" layoutX="107.0" layoutY="235.0" onKeyReleased="#paymentOnKeyReleaseOnAction" prefHeight="16.0" prefWidth="131.0" promptText="Payment" />
+      <TextField fx:id="txtStudentId" layoutX="139.0" layoutY="146.0" onKeyReleased="#idKeyReleaseAction" prefHeight="26.0" prefWidth="212.0" promptText="ID" />
       <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="296.0" layoutY="148.0" onAction="#btnSearchOnAction" prefHeight="21.0" prefWidth="52.0" style="-fx-background-color: gray;" text="Search" textFill="WHITE">
          <font>
             <Font name="System Bold" size="9.0" />
@@ -99,7 +117,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="46.0" layoutY="43.0" onAction="#btnViewRegistrationDetails" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #003249; -fx-background-radius: 6;" text="View details" textFill="WHITE">
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="46.0" layoutY="43.0" onAction="#btnViewRegistrationDetailsOnAction" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #003249; -fx-background-radius: 6;" text="View details" textFill="WHITE">
+         <font>
+            <Font name="System Italic" size="11.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="468.0" layoutY="275.0" onAction="#btnClearOnAction" prefHeight="26.0" prefWidth="91.0" style="-fx-background-color: gray; -fx-background-radius: 6;" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Italic" size="11.0" />
          </font>

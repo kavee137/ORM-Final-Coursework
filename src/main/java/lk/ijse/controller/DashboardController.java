@@ -22,6 +22,9 @@ public class DashboardController {
     @FXML
     private AnchorPane rootNode;
 
+    @FXML
+    private JFXButton btnPayment;
+
 
     @FXML
     private JFXButton btnDashboard;
@@ -142,6 +145,17 @@ public class DashboardController {
     @FXML
     void btnUser(ActionEvent event) throws IOException {
         FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/view/user_form.fxml"));
+        Parent productRoot = productLoader.load();
+        rootNode.getChildren().clear();
+        rootNode.getChildren().add(productRoot);
+
+        Stage stage = (Stage) rootNode.getScene().getWindow();
+        stage.setTitle("");
+    }
+
+    @FXML
+    void btnPaymentsOnAction(ActionEvent event) throws IOException {
+        FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/view/payment_form.fxml"));
         Parent productRoot = productLoader.load();
         rootNode.getChildren().clear();
         rootNode.getChildren().add(productRoot);

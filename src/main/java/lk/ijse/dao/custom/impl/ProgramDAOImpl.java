@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -114,4 +115,48 @@ public class ProgramDAOImpl implements ProgramDAO {
     public Program search(Object... args) throws SQLException, ClassNotFoundException {
         return null;
     }
+
+    @Override
+    public List<String> getProgramNames() {
+        List<String> programList = new ArrayList<>();
+
+        try (Session session = SessionFactoryConfiguration.getInstance().getSession()) {
+            session.beginTransaction();
+
+            // Use a Hibernate HQL query to get distinct program names
+            Query<String> query = session.createQuery("SELECT DISTINCT p.programName FROM Program p", String.class);
+            programList = query.getResultList();
+
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return programList;
+    }
+
+    @Override
+    public Program searchByName(String name) {
+        Program program = null;
+
+        try (Session session = SessionFactoryConfiguration.getInstance().getSession()) {
+            session.beginTransaction();
+
+            // Use an HQL query to search for the program by name
+            Query<Program> query = session.createQuery(
+                    "FROM Program p WHERE p.programName = :name", Program.class);
+            query.setParameter("name", name);
+
+            // Retrieve a single result if available
+            program = query.uniqueResult();
+
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return program;
+    }
+
+
 }

@@ -8,6 +8,7 @@ import lk.ijse.entity.Program;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProgramBOImpl implements ProgramBO {
 
@@ -43,5 +44,15 @@ public class ProgramBOImpl implements ProgramBO {
     @Override
     public boolean updateProgram(ProgramDTO dto) throws SQLException, ClassNotFoundException {
         return programDAO.update(new Program(dto.getProgramId(), dto.getProgramName(), dto.getDuration(), dto.getFee()));
+    }
+
+    @Override
+    public List<String> getProgramNames() throws SQLException, ClassNotFoundException {
+        return programDAO.getProgramNames();
+    }
+
+    @Override
+    public Program searchByName(String name) throws SQLException, ClassNotFoundException {
+        return programDAO.searchByName(name);
     }
 }

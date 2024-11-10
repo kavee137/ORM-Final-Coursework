@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="680.0" prefWidth="666.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.PaymentFormController">
+   <children>
+      <TextField fx:id="txtRegSearch" layoutX="77.0" layoutY="107.0" onKeyReleased="#idKeyReleaseAction" prefHeight="33.0" prefWidth="173.0" promptText="Regitration ID" />
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="191.0" layoutY="113.0" onAction="#btnSearchOnAction" prefHeight="21.0" prefWidth="52.0" style="-fx-background-color: gray;" text="Search" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="9.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Text layoutX="247.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Payment" textAlignment="CENTER" underline="true">
+         <font>
+            <Font name="Al Nile Bold" size="27.0" />
+         </font>
+      </Text>
+      <Label layoutX="79.0" layoutY="162.0" text="Reg ID:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblRegId" layoutX="141.0" layoutY="162.0" prefHeight="24.0" prefWidth="63.0">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtAmount" layoutX="420.0" layoutY="248.0" onKeyReleased="#nameKeyRelaseAction" prefHeight="33.0" prefWidth="167.0" promptText="Amount" />
+      <Label layoutX="270.0" layoutY="110.0" text="Payment ID:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPaymentId" layoutX="372.0" layoutY="110.0" prefHeight="24.0" prefWidth="46.0">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="424.0" layoutY="110.0" text="Payment Date:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPaymentDate" layoutX="556.0" layoutY="110.0" prefHeight="24.0" prefWidth="98.0">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="78.0" layoutY="210.0" text="Program:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblProgramName" layoutX="160.0" layoutY="210.0" prefHeight="24.0" prefWidth="131.0">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="234.0" layoutY="163.0" text="Student ID:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblStudentId" layoutX="336.0" layoutY="163.0" prefHeight="24.0" prefWidth="63.0">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cmbPaymentMethod" layoutX="234.0" layoutY="245.0" prefHeight="26.0" prefWidth="140.0" />
+      <Label layoutX="78.0" layoutY="251.0" text="Payment method:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblPayment" layoutX="100.0" layoutY="376.0" prefHeight="277.0" prefWidth="455.0">
+        <columns>
+          <TableColumn fx:id="colPaymentId" prefWidth="72.76177597045898" text="Payment ID" />
+          <TableColumn fx:id="colRegistrationId" prefWidth="90.95138549804688" text="Registration ID" />
+            <TableColumn fx:id="colPaymentDate" prefWidth="100.09405517578125" text="Date" />
+            <TableColumn fx:id="colPaymentMethod" prefWidth="97.49844360351562" text="Payment Method" />
+            <TableColumn fx:id="colAmount" prefWidth="90.0689697265625" text="Amount" />
+        </columns>
+      </TableView>
+      <Label layoutX="418.0" layoutY="161.0" text="Porgram Fee:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblProgramFee" layoutX="535.0" layoutY="161.0" prefHeight="24.0" prefWidth="131.0">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="418.0" layoutY="187.0" text="Paid amount:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPaidAmount" layoutX="534.0" layoutY="187.0" prefHeight="24.0" prefWidth="94.0">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="418.0" layoutY="212.0" text="Balance:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPaidAmount1" layoutX="536.0" layoutY="212.0" prefHeight="24.0" prefWidth="56.0">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
