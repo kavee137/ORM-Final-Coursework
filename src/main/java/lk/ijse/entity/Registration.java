@@ -41,6 +41,24 @@ public class Registration {
     @OneToMany(mappedBy = "registration", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Payment> payments = new HashSet<>();
 
-    // Getters and setters
+    public Registration(int regId, Student student, Program program, Date registrationDate, double paidAmount, int paymentId) {
+        this.regId = regId;
+        this.student = student;
+        this.program = program;
+        this.registrationDate = registrationDate;
+        this.paidAmount = paidAmount;
+    }
+
+    public Registration(int regId, Student student, Program program, Date registrationDate, double paidAmount) {
+        this.regId = regId;
+        this.student = student;
+        this.program = program;
+        this.registrationDate = registrationDate;
+        this.paidAmount = paidAmount;
+    }
+
+    public Registration(int regId) {
+        this.regId = regId;
+    }
 }
 

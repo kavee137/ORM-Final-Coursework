@@ -41,4 +41,7 @@ public class Program {
         this.fee = fee;
     }
 
+    public Program(String programId) {
+        this.programId = programId;
+    }
 }

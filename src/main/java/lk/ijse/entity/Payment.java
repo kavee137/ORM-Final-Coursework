@@ -1,6 +1,7 @@
 package lk.ijse.entity;
 
 import jakarta.persistence.*;
+import lk.ijse.dto.RegistrationDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,5 +36,10 @@ public class Payment {
 
     @Column(name = "payment_method", length = 50)
     private String paymentMethod;
+
+    public Payment(int paymentId) {
+        this.paymentId = paymentId;
+    }
+
 }
 

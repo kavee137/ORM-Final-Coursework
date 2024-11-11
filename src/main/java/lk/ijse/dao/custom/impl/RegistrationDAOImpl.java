@@ -4,6 +4,7 @@ import lk.ijse.config.SessionFactoryConfiguration;
 import lk.ijse.dao.custom.RegistrationDAO;
 import lk.ijse.entity.Registration;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
@@ -18,8 +19,11 @@ public class RegistrationDAOImpl implements RegistrationDAO {
     }
 
     @Override
-    public boolean save(Registration entity) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean saveRegistration(Registration registration, Session session) throws SQLException, ClassNotFoundException, IOException {
+
+        session.save(registration);
+
+        return true;
     }
 
     @Override
@@ -62,5 +66,10 @@ public class RegistrationDAOImpl implements RegistrationDAO {
     @Override
     public Registration search(Object... args) throws SQLException, ClassNotFoundException {
         return null;
+    }
+
+    @Override
+    public boolean save(Registration entity) throws SQLException, ClassNotFoundException, IOException {
+        return false;
     }
 }

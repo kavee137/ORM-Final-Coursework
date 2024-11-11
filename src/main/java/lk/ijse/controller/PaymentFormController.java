@@ -7,6 +7,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.PaymentBO;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class PaymentFormController {
 
@@ -54,6 +59,36 @@ public class PaymentFormController {
 
     @FXML
     private TextField txtRegSearch;
+
+    PaymentBO paymentBO  = (PaymentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PAYMENT);
+
+
+
+
+    public void initialize() {
+        generateNewPaymentId();
+    }
+
+    private void generateNewPaymentId() {
+        try {
+            String nextStudentId = paymentBO.generateNewID();
+
+            lblPaymentId.setText(nextStudentId);
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     @FXML
     void btnSearchOnAction(ActionEvent event) {

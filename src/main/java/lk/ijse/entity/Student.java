@@ -55,4 +55,8 @@ public class Student {
         this.address = address;
         this.phone = phone;
     }
+
+    public Student(int studentId) {
+        this.studentId = studentId;
+    }
 }

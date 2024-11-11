@@ -9,15 +9,24 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.Util.Regex;
 import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.PaymentBO;
 import lk.ijse.bo.custom.ProgramBO;
 import lk.ijse.bo.custom.RegistrationBO;
 import lk.ijse.bo.custom.StudentBO;
+import lk.ijse.config.SessionFactoryConfiguration;
+import lk.ijse.dto.PaymentDTO;
+import lk.ijse.dto.RegistrationDTO;
 import lk.ijse.entity.Program;
+import lk.ijse.entity.Registration;
 import lk.ijse.entity.Student;
+import lk.ijse.entity.User;
+import org.hibernate.Session;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.SQLTimeoutException;
 import java.time.LocalDate;
 
 public class RegistrationController {
@@ -85,6 +94,7 @@ public class RegistrationController {
     ProgramBO programBO  = (ProgramBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PROGRAM);
     RegistrationBO registrationBO  = (RegistrationBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.REGISTRATION);
     StudentBO studentBO  = (StudentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.STUDENT);
+    PaymentBO paymentBO  = (PaymentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PAYMENT);
 
     public void initialize() {
         lblDate.setText(LocalDate.now().toString());
@@ -149,9 +159,46 @@ public class RegistrationController {
 
 
     @FXML
-    void btnSaveOnAction(ActionEvent event) {
+    void btnRegisterOnAction(ActionEvent event) {
+        try {
+            // Gather data for the registration table
+            int regId = Integer.parseInt(lblRegistrationId.getText());
+            double paidAmount = Double.parseDouble(txtFirstPayment.getText());
+            Date regDate = Date.valueOf(lblDate.getText());
+            String programId = lblProgramId.getText();
+            String payMethod = cmbPaymentMethod.getValue();
+            int studentId = Integer.parseInt(txtStudentId.getText());
 
+            // Check if any required field is missing
+            if (regId < 1 || paidAmount < 1 || regDate == null || programId.isEmpty() || studentId < 1 || payMethod == null) {
+                new Alert(Alert.AlertType.ERROR, "Please fill all the fields correctly!").show();
+                return;
+            }
+
+            Program program = new Program(programId);
+            Student student = new Student(studentId);
+
+            // Generate payment ID and create DTOs
+            int payId = Integer.parseInt(paymentBO.generateNewID());
+            RegistrationDTO registrationDTO = new RegistrationDTO(regId, student, program, regDate, paidAmount);
+            PaymentDTO paymentDTO = new PaymentDTO(payId, registrationDTO, paidAmount, regDate, payMethod);
+
+            // Save registration and handle the result
+            boolean isSaved = registrationBO.saveRegistration(registrationDTO, paymentDTO);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Registration Successful!").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to save the registration").show();
+            }
+
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, "Invalid number format! Please check your inputs.").show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Please check all fields entered correctly!").show();
+        }
     }
+
 
     @FXML
     void btnSearchOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
@@ -244,8 +291,6 @@ public class RegistrationController {
 
         initialize();
     }
-
-    // regex for student id search
 
     public void idKeyReleaseAction(javafx.scene.input.KeyEvent keyEvent) {
         Regex.setTextColor(lk.ijse.Util.TextField.INTID, txtStudentId);
