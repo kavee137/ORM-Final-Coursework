@@ -95,6 +95,9 @@ public class DashboardController {
 
         Stage stage = (Stage) rootNode.getScene().getWindow();
         stage.setTitle("Dashboard");
+
+
+
     }
 
     @FXML

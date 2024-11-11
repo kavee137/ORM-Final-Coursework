@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    public ArrayList<User> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<User> getAll() throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
 
         try {
@@ -36,7 +37,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean save(User user) throws SQLException, ClassNotFoundException {
+    public boolean save(User user) throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -50,7 +51,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean update(User user) throws SQLException, ClassNotFoundException {
+    public boolean update(User user) throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -67,7 +68,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public String generateNewID() throws SQLException, ClassNotFoundException {
+    public String generateNewID() throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
 
         try {
@@ -91,7 +92,7 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         NativeQuery query = session.createNativeQuery("delete from user where userId = ?1");

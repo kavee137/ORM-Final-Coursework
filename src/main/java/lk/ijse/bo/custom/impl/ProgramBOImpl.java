@@ -6,6 +6,7 @@ import lk.ijse.dao.custom.ProgramDAO;
 import lk.ijse.dto.ProgramDTO;
 import lk.ijse.entity.Program;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +17,17 @@ public class ProgramBOImpl implements ProgramBO {
 
 
     @Override
-    public String generateNewID() throws SQLException, ClassNotFoundException {
+    public String generateNewID() throws SQLException, ClassNotFoundException, IOException {
         return (String) programDAO.generateNewID();
     }
 
     @Override
-    public boolean saveProgram(ProgramDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean saveProgram(ProgramDTO dto) throws SQLException, ClassNotFoundException, IOException {
         return programDAO.save(new Program(dto.getProgramId(), dto.getProgramName(), dto.getDuration(), dto.getFee()));
     }
 
     @Override
-    public ArrayList<ProgramDTO> getAllPrograms() throws SQLException, ClassNotFoundException {
+    public ArrayList<ProgramDTO> getAllPrograms() throws SQLException, ClassNotFoundException, IOException {
         ArrayList<ProgramDTO> allPrograms = new ArrayList<>();
 
         ArrayList<Program> all = programDAO.getAll();
@@ -37,12 +38,12 @@ public class ProgramBOImpl implements ProgramBO {
     }
 
     @Override
-    public boolean deleteProgram(String id) throws SQLException, ClassNotFoundException {
+    public boolean deleteProgram(String id) throws SQLException, ClassNotFoundException, IOException {
         return programDAO.delete(id);
     }
 
     @Override
-    public boolean updateProgram(ProgramDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean updateProgram(ProgramDTO dto) throws SQLException, ClassNotFoundException, IOException {
         return programDAO.update(new Program(dto.getProgramId(), dto.getProgramName(), dto.getDuration(), dto.getFee()));
     }
 

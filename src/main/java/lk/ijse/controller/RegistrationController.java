@@ -16,10 +16,14 @@ import lk.ijse.entity.Program;
 import lk.ijse.entity.Student;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class RegistrationController {
+
+    @FXML
+    private JFXComboBox<String> cmbPaymentMethod;
 
     @FXML
     private JFXComboBox<String> cmbProgramName;
@@ -86,6 +90,32 @@ public class RegistrationController {
         lblDate.setText(LocalDate.now().toString());
         setCmbProgramName();
         generateNewRegID();
+        clickEnterButtonMoveCursor();
+        setPaymentType();
+    }
+
+
+
+
+
+    private void setPaymentType() {
+        ObservableList<String> paymentType = FXCollections.observableArrayList();
+        cmbPaymentMethod.setValue("Cash");
+
+        paymentType.add("Cash");
+        paymentType.add("Card");
+
+        cmbPaymentMethod.setItems(paymentType);
+    }
+    
+    void clickEnterButtonMoveCursor() {
+        txtStudentId.setOnAction(event -> {
+            try {
+                btnSearchOnAction(new ActionEvent());
+            } catch (SQLException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void generateNewRegID() {
@@ -93,15 +123,10 @@ public class RegistrationController {
             String nextRegId = registrationBO.generateNewID();
 
             lblRegistrationId.setText(String.valueOf(nextRegId));
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
-
 
     private void setCmbProgramName() {
         ObservableList<String> obList = FXCollections.observableArrayList();
@@ -186,6 +211,7 @@ public class RegistrationController {
                 lblProgramId.setText(program.getProgramId());
                 lblFee.setText(String.valueOf(program.getFee()));
                 lblProgramDuration.setText(program.getDuration());
+                txtFirstPayment.requestFocus();
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

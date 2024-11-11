@@ -6,6 +6,7 @@ import lk.ijse.dao.custom.UserDAO;
 import lk.ijse.dto.UserDTO;
 import lk.ijse.entity.User;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class UserBOImpl implements UserBO {
 
 
     @Override
-    public ArrayList<UserDTO> getAllUsers() throws SQLException, ClassNotFoundException {
+    public ArrayList<UserDTO> getAllUsers() throws SQLException, ClassNotFoundException, IOException {
         ArrayList<UserDTO> allUsers = new ArrayList<>();
 
         ArrayList<User> all = userDAO.getAll();
@@ -26,22 +27,22 @@ public class UserBOImpl implements UserBO {
     }
 
     @Override
-    public boolean updateUser(UserDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean updateUser(UserDTO dto) throws SQLException, ClassNotFoundException, IOException {
         return userDAO.update(new User(dto.getUserId(), dto.getUsername(), dto.getPassword(), dto.getRole()));
     }
 
     @Override
-    public String generateNewID() throws SQLException, ClassNotFoundException {
+    public String generateNewID() throws SQLException, ClassNotFoundException, IOException {
         return userDAO.generateNewID();
     }
 
     @Override
-    public boolean saveUser(UserDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean saveUser(UserDTO dto) throws SQLException, ClassNotFoundException, IOException {
         return userDAO.save(new User(dto.getUserId(), dto.getUsername(), dto.getPassword(), dto.getRole()));
     }
 
     @Override
-    public boolean deleteUser(int id) throws SQLException, ClassNotFoundException {
+    public boolean deleteUser(int id) throws SQLException, ClassNotFoundException, IOException {
         return userDAO.delete(String.valueOf(id));
     }
 

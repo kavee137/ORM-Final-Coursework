@@ -6,6 +6,8 @@ import lk.ijse.dao.custom.StudentDAO;
 import lk.ijse.dto.StudentDTO;
 import lk.ijse.entity.Student;
 import lk.ijse.entity.User;
+
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -14,22 +16,22 @@ public class StudentBOImpl implements StudentBO {
     StudentDAO studentDAO = (StudentDAO)DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.STUDENT);
 
     @Override
-    public String generateNewID() throws SQLException, ClassNotFoundException {
+    public String generateNewID() throws SQLException, ClassNotFoundException, IOException {
         return studentDAO.generateNewID();
     }
 
     @Override
-    public boolean saveStudent(StudentDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean saveStudent(StudentDTO dto) throws SQLException, ClassNotFoundException, IOException {
         return studentDAO.save(new Student(dto.getStudentId(), dto.getName(), dto.getAddress(), dto.getPhone(), dto.getRegDate(), new User(dto.getUser())));
     }
 
     @Override
-    public boolean updateStudent(StudentDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean updateStudent(StudentDTO dto) throws SQLException, ClassNotFoundException, IOException {
         return studentDAO.update(new Student(dto.getStudentId(), dto.getName(), dto.getAddress(), dto.getPhone(), dto.getRegDate(), new User(dto.getUser())));
     }
 
     @Override
-    public ArrayList<StudentDTO> getAllStudents() throws SQLException, ClassNotFoundException {
+    public ArrayList<StudentDTO> getAllStudents() throws SQLException, ClassNotFoundException, IOException {
         ArrayList<StudentDTO> allStudents = new ArrayList<>();
 
         ArrayList<Student> all = studentDAO.getAll();
@@ -40,7 +42,7 @@ public class StudentBOImpl implements StudentBO {
     }
 
     @Override
-    public boolean deleteStudent(int id) throws SQLException, ClassNotFoundException {
+    public boolean deleteStudent(int id) throws SQLException, ClassNotFoundException, IOException {
         return studentDAO.delete(String.valueOf(id));
     }
 

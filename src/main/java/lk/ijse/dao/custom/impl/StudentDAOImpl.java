@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 
     @Override
-    public ArrayList<Student> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Student> getAll() throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
 
         try {
@@ -37,7 +38,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public boolean save(Student student) throws SQLException, ClassNotFoundException {
+    public boolean save(Student student) throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -48,7 +49,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public boolean update(Student student) throws SQLException, ClassNotFoundException {
+    public boolean update(Student student) throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -64,7 +65,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public String generateNewID() throws SQLException, ClassNotFoundException {
+    public String generateNewID() throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
 
         try {
@@ -86,7 +87,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         NativeQuery query = session.createNativeQuery("delete from Students where studentId = ?1");

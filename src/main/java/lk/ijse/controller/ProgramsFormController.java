@@ -12,6 +12,7 @@ import lk.ijse.dto.ProgramDTO;
 import lk.ijse.tdm.ProgramTM;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -104,10 +105,10 @@ public class ProgramsFormController {
             for (ProgramDTO programDTO : allPrograms) {
                 tblProgram.getItems().add(new ProgramTM(programDTO.getProgramId(), programDTO.getProgramName(), programDTO.getDuration(), programDTO.getFee()));
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -122,7 +123,7 @@ public class ProgramsFormController {
             String nextProgramId = programBO.generateNewID();
 
             lblProgramId.setText(nextProgramId);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -158,7 +159,7 @@ public class ProgramsFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -182,7 +183,7 @@ public class ProgramsFormController {
                         clearFields();
                         initialize();
                     }
-                } catch (SQLException | ClassNotFoundException e) {
+                } catch (SQLException | ClassNotFoundException | IOException e) {
                     throw new RuntimeException(e);
                 }
             } else {
@@ -213,7 +214,7 @@ public class ProgramsFormController {
                         clearFields();
                         initialize();
                     }
-                } catch (SQLException | ClassNotFoundException e) {
+                } catch (SQLException | ClassNotFoundException | IOException e) {
                     throw new RuntimeException(e);
                 }
             } else {

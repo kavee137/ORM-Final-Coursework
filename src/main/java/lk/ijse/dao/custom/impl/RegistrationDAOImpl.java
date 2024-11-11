@@ -6,6 +6,7 @@ import lk.ijse.entity.Registration;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
     }
 
     @Override
-    public String generateNewID() throws SQLException, ClassNotFoundException {
+    public String generateNewID() throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
 
         try {

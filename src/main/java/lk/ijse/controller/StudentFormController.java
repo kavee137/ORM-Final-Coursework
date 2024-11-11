@@ -21,6 +21,7 @@ import lk.ijse.tdm.UserTm;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -143,6 +144,8 @@ public class StudentFormController {
             }
         } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -157,7 +160,7 @@ public class StudentFormController {
             String nextStudentId = studentBO.generateNewID();
 
             lblId.setText(String.valueOf(nextStudentId));
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -196,7 +199,7 @@ public class StudentFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -243,6 +246,8 @@ public class StudentFormController {
 
                 } catch (SQLException | ClassNotFoundException e) {
                     new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             }
         } else {
@@ -308,6 +313,8 @@ public class StudentFormController {
                     }
                 } catch (SQLException | ClassNotFoundException e) {
                     new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             }
         } else {

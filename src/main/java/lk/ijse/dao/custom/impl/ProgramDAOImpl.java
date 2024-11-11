@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
 public class ProgramDAOImpl implements ProgramDAO {
 
     @Override
-    public ArrayList<Program> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Program> getAll() throws SQLException, ClassNotFoundException, IOException {
             Session session = SessionFactoryConfiguration.getInstance().getSession();
 
             try {
@@ -36,7 +37,7 @@ public class ProgramDAOImpl implements ProgramDAO {
     }
 
     @Override
-    public boolean save(Program program) throws SQLException, ClassNotFoundException {
+    public boolean save(Program program) throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -47,7 +48,7 @@ public class ProgramDAOImpl implements ProgramDAO {
     }
 
     @Override
-    public boolean update(Program program) throws SQLException, ClassNotFoundException {
+    public boolean update(Program program) throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -99,7 +100,7 @@ public class ProgramDAOImpl implements ProgramDAO {
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException, ClassNotFoundException, IOException {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         NativeQuery query = session.createNativeQuery("delete from Programs where program_id = ?1");

@@ -1,43 +1,36 @@
 package lk.ijse.config;
 
-import lk.ijse.entity.User;
-import lk.ijse.entity.Student;
-import lk.ijse.entity.Program;
-import lk.ijse.entity.Registration;
-import lk.ijse.entity.Payment;
+import lk.ijse.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+
+import java.io.IOException;
+import java.util.Properties;
+
 public class SessionFactoryConfiguration {
-
-    private static SessionFactoryConfiguration sessionFactoryConfiguration;
-
-    private SessionFactory sessionFactory;
-
-    // Private constructor to initialize the SessionFactory with all entity classes
-    private SessionFactoryConfiguration() {
-        Configuration configuration = new Configuration()
-                .configure()
-                .addAnnotatedClass(User.class)
-                .addAnnotatedClass(Student.class)
-                .addAnnotatedClass(Program.class)
-                .addAnnotatedClass(Registration.class)
-                .addAnnotatedClass(Payment.class);
+    private static SessionFactoryConfiguration factoryConfiguration;
+    private final SessionFactory sessionFactory;
+    private SessionFactoryConfiguration() throws IOException {
+        Configuration configuration = new Configuration();
+        Properties properties = new Properties();
+        properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("hibernate.properties"));
+        configuration.setProperties(properties);
+        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Student.class);
+        configuration.addAnnotatedClass(Program.class);
+        configuration.addAnnotatedClass(Registration.class);
+        configuration.addAnnotatedClass(Payment.class);
 
         sessionFactory = configuration.buildSessionFactory();
     }
 
-    // Singleton pattern to ensure only one instance of SessionFactoryConfiguration
-    public static SessionFactoryConfiguration getInstance() {
-        if (sessionFactoryConfiguration == null) {
-            sessionFactoryConfiguration = new SessionFactoryConfiguration();
-        }
-        return sessionFactoryConfiguration;
+    public static SessionFactoryConfiguration getInstance() throws IOException {
+        return (factoryConfiguration==null) ? factoryConfiguration=new SessionFactoryConfiguration():factoryConfiguration;
     }
 
-    // Method to open a new Hibernate session
-    public Session getSession() {
+    public Session getSession(){
         return sessionFactory.openSession();
     }
 }
