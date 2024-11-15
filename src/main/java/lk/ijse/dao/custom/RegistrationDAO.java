@@ -6,9 +6,13 @@ import org.hibernate.Session;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public interface RegistrationDAO extends CrudDAO<Registration> {
 
-    public boolean saveRegistration(Registration registration, Session session) throws SQLException, ClassNotFoundException, IOException;
+    List<Object[]> loadAllRegistrationDetails() throws IOException;
 
+    boolean saveRegistration(Registration registration, Session session) throws SQLException, ClassNotFoundException, IOException;
+
+    boolean updateAmount(Registration registration, Session session);
 }

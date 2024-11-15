@@ -10,6 +10,7 @@ import lk.ijse.entity.User;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentBOImpl implements StudentBO {
 
@@ -49,5 +50,10 @@ public class StudentBOImpl implements StudentBO {
     @Override
     public Student studentSearch(int id) throws SQLException, ClassNotFoundException {
         return studentDAO.search(id);
+    }
+
+    @Override
+    public List<Object[]> studentSearchForPayment(int id) throws IOException {
+        return studentDAO.studentSearchForPayment(id);
     }
 }

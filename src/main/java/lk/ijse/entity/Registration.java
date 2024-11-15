@@ -60,5 +60,10 @@ public class Registration {
     public Registration(int regId) {
         this.regId = regId;
     }
+
+    public Registration(int regId, double paidAmount) {
+        this.regId = regId;
+        this.paidAmount = paidAmount;
+    }
 }
 

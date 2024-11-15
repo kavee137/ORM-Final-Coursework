@@ -1,4 +1,4 @@
-package lk.ijse.dto;
+package lk.ijse.tdm;
 
 import jakarta.persistence.*;
 import lk.ijse.entity.Registration;
@@ -10,16 +10,17 @@ import lombok.ToString;
 import java.util.Date;
 
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 
-public class PaymentDTO {
+public class PaymentTM {
+
     private int paymentId;
-    private RegistrationDTO registration;
+    private int registrationId;
     private double amount;
     private Date paymentDate;
     private String paymentMethod;
 }
-

@@ -9,8 +9,32 @@ import org.hibernate.query.Query;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PaymentDAOImpl implements PaymentDAO {
+
+    @Override
+    public ArrayList<Payment> getDataUsingRegId(int regId) throws SQLException, ClassNotFoundException, IOException {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
+
+        try {
+            // HQL query to fetch Payment records with the specified regId in Registration
+            Query<Payment> query = session.createQuery("FROM Payment p WHERE p.registration.regId = :regId", Payment.class);
+            query.setParameter("regId", regId);  // Set the regId parameter
+
+            // Fetch result list from query
+            List<Payment> paymentList = query.list();
+
+            // Convert List to ArrayList (if needed)
+            return new ArrayList<>(paymentList);
+
+        } finally {
+            session.close(); // Always close the session after use
+        }
+    }
+
+
+
     @Override
     public ArrayList<Payment> getAll() throws SQLException, ClassNotFoundException, IOException {
         return null;

@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.Util.Regex;
 import lk.ijse.bo.BOFactory;
@@ -16,10 +17,14 @@ import lk.ijse.bo.custom.StudentBO;
 import lk.ijse.config.SessionFactoryConfiguration;
 import lk.ijse.dto.PaymentDTO;
 import lk.ijse.dto.RegistrationDTO;
+import lk.ijse.dto.StudentDTO;
 import lk.ijse.entity.Program;
 import lk.ijse.entity.Registration;
 import lk.ijse.entity.Student;
 import lk.ijse.entity.User;
+import lk.ijse.tdm.ProgramTM;
+import lk.ijse.tdm.RegistrationTM;
+import lk.ijse.tdm.StudentTm;
 import org.hibernate.Session;
 
 import java.awt.event.KeyEvent;
@@ -28,6 +33,8 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.SQLTimeoutException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegistrationController {
 
@@ -80,7 +87,7 @@ public class RegistrationController {
     private AnchorPane rootNode;
 
     @FXML
-    private TableView<?> tblRegistration;
+    private TableView<RegistrationTM> tblRegistration;
 
     @FXML
     private TextField txtFirstPayment;
@@ -96,17 +103,47 @@ public class RegistrationController {
     StudentBO studentBO  = (StudentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.STUDENT);
     PaymentBO paymentBO  = (PaymentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PAYMENT);
 
-    public void initialize() {
+    public void initialize() throws IOException {
         lblDate.setText(LocalDate.now().toString());
         setCmbProgramName();
         generateNewRegID();
         clickEnterButtonMoveCursor();
         setPaymentType();
+        loadAllRegistrationDetails();
+        setCellValueFactory();
     }
 
+    private void setCellValueFactory() {
+        colRegId.setCellValueFactory(new PropertyValueFactory<>("registrationId"));
+        colStudentId.setCellValueFactory(new PropertyValueFactory<>("studentId"));
+        colStudentName.setCellValueFactory(new PropertyValueFactory<>("studentName"));
+        colProgramId.setCellValueFactory(new PropertyValueFactory<>("proId"));
+        colProgramName.setCellValueFactory(new PropertyValueFactory<>("proName"));
+        colPaidAmount.setCellValueFactory(new PropertyValueFactory<>("paidAmount"));
+        colFee.setCellValueFactory(new PropertyValueFactory<>("fee"));
+    }
 
+    private void loadAllRegistrationDetails() throws IOException {
+        // Convert the data to RegistrationDetails objects
+        ObservableList<RegistrationTM> registrationDetailsList = FXCollections.observableArrayList();
 
+        List<Object[]> allReg = registrationBO.loadAllRegistrationDetails();
 
+        for (Object[] row : allReg) {
+            int regId = (Integer) row[0];
+            double paidAmount = (Double) row[1];
+            String programId = (String) row[2];
+            int studentId = (Integer) row[3];
+            String studentName = (String) row[4];
+            double programFee = (Double) row[5];
+            String programName = (String) row[6];
+
+            RegistrationTM details = new RegistrationTM(regId, studentId, studentName, programId, programName, paidAmount, programFee);
+            registrationDetailsList.add(details);
+        }
+
+        tblRegistration.setItems(registrationDetailsList);
+    }
 
     private void setPaymentType() {
         ObservableList<String> paymentType = FXCollections.observableArrayList();
@@ -187,6 +224,7 @@ public class RegistrationController {
             boolean isSaved = registrationBO.saveRegistration(registrationDTO, paymentDTO);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Registration Successful!").show();
+                clearFields();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to save the registration").show();
             }
@@ -221,7 +259,7 @@ public class RegistrationController {
         }
     }
 
-    public boolean isSearchIdValied(){
+    public boolean isSearchIdValied() {
         return Regex.setTextColor(lk.ijse.Util.TextField.INTID, txtStudentId);
     }
 
@@ -265,14 +303,12 @@ public class RegistrationController {
         }
     }
 
-
-
     @FXML
-    void btnClearOnAction(ActionEvent event) {
+    void btnClearOnAction(ActionEvent event) throws IOException {
         clearFields();
     }
 
-    void clearFields() {
+    void clearFields() throws IOException {
         txtStudentId.setText(null);
         txtStudentId.setStyle("");
 

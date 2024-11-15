@@ -18,32 +18,32 @@
             <Font name="Al Nile Bold" size="27.0" />
          </font>
       </Text>
-      <Label layoutX="39.0" layoutY="108.0" text="Registration ID:" textFill="#757575">
+      <Label layoutX="37.0" layoutY="108.0" text="Registration ID:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblRegistrationId" layoutX="143.0" layoutY="109.0" prefHeight="17.0" prefWidth="85.0">
+      <Label fx:id="lblRegistrationId" layoutX="152.0" layoutY="109.0" prefHeight="17.0" prefWidth="85.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Label layoutX="39.0" layoutY="148.0" text="Student ID:" textFill="#757575">
+      <Label layoutX="60.0" layoutY="148.0" text="Student ID:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="cmbProgramName" layoutX="143.0" layoutY="182.0" onAction="#cmbProgramNameOnAction" prefHeight="26.0" prefWidth="225.0" />
-      <Label layoutX="39.0" layoutY="188.0" text="Program Name" textFill="#757575">
+      <JFXComboBox fx:id="cmbProgramName" layoutX="147.0" layoutY="182.0" onAction="#cmbProgramNameOnAction" prefHeight="26.0" prefWidth="214.0" />
+      <Label layoutX="34.0" layoutY="189.0" text="Program Name:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="466.0" layoutY="188.0" text="Program ID:" textFill="#757575">
+      <Label layoutX="466.0" layoutY="171.0" text="Program ID:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblProgramId" layoutX="550.0" layoutY="189.0" prefHeight="17.0" prefWidth="85.0">
+      <Label fx:id="lblProgramId" layoutX="550.0" layoutY="172.0" prefHeight="17.0" prefWidth="85.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
@@ -56,21 +56,21 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Label layoutX="449.0" layoutY="147.0" text="Student name:" textFill="#757575">
+      <Label layoutX="449.0" layoutY="139.0" text="Student name:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblStudentName" layoutX="549.0" layoutY="148.0" prefHeight="17.0" prefWidth="85.0">
+      <Label fx:id="lblStudentName" layoutX="549.0" layoutY="140.0" prefHeight="17.0" prefWidth="85.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Label layoutX="277.0" layoutY="238.0" text="Fee:" textFill="#757575">
+      <Label layoutX="507.0" layoutY="231.0" text="Fee:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblFee" layoutX="322.0" layoutY="239.0" prefHeight="17.0" prefWidth="85.0">
+      <Label fx:id="lblFee" layoutX="552.0" layoutY="232.0" prefHeight="17.0" prefWidth="85.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
@@ -85,23 +85,23 @@
             <TableColumn fx:id="colFee" prefWidth="89.0" text="Fee" />
          </columns>
       </TableView>
-      <Label layoutX="431.0" layoutY="237.0" prefHeight="18.0" prefWidth="107.0" text="Program duration:" textFill="#757575">
+      <Label layoutX="431.0" layoutY="201.0" prefHeight="18.0" prefWidth="107.0" text="Program duration:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblProgramDuration" layoutX="548.0" layoutY="239.0" prefHeight="17.0" prefWidth="85.0">
+      <Label fx:id="lblProgramDuration" layoutX="548.0" layoutY="203.0" prefHeight="17.0" prefWidth="85.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Label layoutX="40.0" layoutY="239.0" text="Payment:" textFill="#757575">
+      <Label layoutX="69.0" layoutY="239.0" text="Payment:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtFirstPayment" layoutX="107.0" layoutY="235.0" onKeyReleased="#paymentOnKeyReleaseOnAction" prefHeight="16.0" prefWidth="131.0" promptText="Payment" />
-      <TextField fx:id="txtStudentId" layoutX="139.0" layoutY="146.0" onKeyReleased="#idKeyReleaseAction" prefHeight="26.0" prefWidth="212.0" promptText="ID" />
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="296.0" layoutY="148.0" onAction="#btnSearchOnAction" prefHeight="21.0" prefWidth="52.0" style="-fx-background-color: gray;" text="Search" textFill="WHITE">
+      <TextField fx:id="txtFirstPayment" layoutX="146.0" layoutY="235.0" onKeyReleased="#paymentOnKeyReleaseOnAction" prefHeight="26.0" prefWidth="218.0" promptText="Payment" />
+      <TextField fx:id="txtStudentId" layoutX="147.0" layoutY="146.0" onKeyReleased="#idKeyReleaseAction" prefHeight="26.0" prefWidth="217.0" promptText="ID" />
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="309.0" layoutY="148.0" onAction="#btnSearchOnAction" prefHeight="21.0" prefWidth="52.0" style="-fx-background-color: gray;" text="Search" textFill="WHITE">
          <font>
             <Font name="System Bold" size="9.0" />
          </font>
@@ -109,7 +109,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="269.0" layoutY="279.0" onAction="#btnRegisterOnAction" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: green; -fx-background-radius: 6;" text="Register" textFill="WHITE">
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="389.0" layoutY="275.0" onAction="#btnRegisterOnAction" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: green; -fx-background-radius: 6;" text="Register" textFill="WHITE">
          <font>
             <Font name="System Italic" size="11.0" />
          </font>
@@ -133,8 +133,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXComboBox fx:id="cmbPaymentMethod" layoutX="154.0" layoutY="272.0" prefHeight="26.0" prefWidth="91.0" />
-      <Label layoutX="39.0" layoutY="278.0" text="Payment Method:" textFill="#757575">
+      <JFXComboBox fx:id="cmbPaymentMethod" layoutX="147.0" layoutY="272.0" prefHeight="26.0" prefWidth="216.0" />
+      <Label layoutX="20.0" layoutY="278.0" text="Payment Method:" textFill="#757575">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>

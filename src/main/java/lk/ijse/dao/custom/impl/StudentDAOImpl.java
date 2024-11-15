@@ -1,6 +1,8 @@
 package lk.ijse.dao.custom.impl;
 
 import lk.ijse.config.SessionFactoryConfiguration;
+import lk.ijse.dao.DAOFactory;
+import lk.ijse.dao.custom.QueryDAO;
 import lk.ijse.dao.custom.StudentDAO;
 import lk.ijse.entity.Student;
 import lk.ijse.entity.User;
@@ -16,6 +18,7 @@ import java.util.List;
 
 public class StudentDAOImpl implements StudentDAO {
 
+    QueryDAO queryDAO = (QueryDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.QUERY);
 
     @Override
     public ArrayList<Student> getAll() throws SQLException, ClassNotFoundException, IOException {
@@ -131,5 +134,12 @@ public class StudentDAOImpl implements StudentDAO {
         }
 
         return student;
+    }
+
+
+
+    @Override
+    public List<Object[]> studentSearchForPayment(int id) throws IOException {
+        return queryDAO.studentSearchForPayment(id);
     }
 }

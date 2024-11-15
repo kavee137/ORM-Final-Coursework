@@ -10,8 +10,47 @@ import org.hibernate.query.Query;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RegistrationDAOImpl implements RegistrationDAO {
+
+
+    @Override
+    public List<Object[]> loadAllRegistrationDetails() throws IOException {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
+        Transaction transaction = null;
+        List<Object[]> results = new ArrayList<>();
+
+        try {
+            transaction = session.beginTransaction();
+
+            // HQL query to fetch required details from Registrations, Students, and Programs
+            String hql = "SELECT r.regId, r.paidAmount, r.program.programId, r.student.studentId, r.student.name, r.program.fee, r.program.programName " +
+                    "FROM Registration r " +
+                    "JOIN r.student s " +
+                    "JOIN r.program p";
+
+            Query<Object[]> query = session.createQuery(hql, Object[].class);
+
+            // Execute the query and get the result list
+            results = query.getResultList();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            try {
+                session.close();
+            } catch (Exception closeException) {
+                closeException.printStackTrace();
+            }
+        }
+        return results;
+    }
+
 
     @Override
     public ArrayList<Registration> getAll() throws SQLException, ClassNotFoundException {
@@ -25,6 +64,26 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 
         return true;
     }
+
+    @Override
+    public boolean updateAmount(Registration registration, Session session) {
+        try {
+            // HQL update query to set paidAmount where regId matches
+            String hql = "UPDATE Registration r SET r.paidAmount = :paidAmount WHERE r.regId = :regId";
+            Query query = session.createQuery(hql);
+            query.setParameter("paidAmount", registration.getPaidAmount());
+            query.setParameter("regId", registration.getRegId());
+
+            // Execute update and check the number of affected rows
+            int affectedRows = query.executeUpdate();
+            return affectedRows > 0;  // Returns true if at least one row was updated
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     @Override
     public boolean update(Registration entity) throws SQLException, ClassNotFoundException {

@@ -6,6 +6,7 @@ import lk.ijse.dto.RegistrationDTO;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public interface RegistrationBO extends SuperBO {
 
@@ -13,4 +14,5 @@ public interface RegistrationBO extends SuperBO {
 
     boolean saveRegistration(RegistrationDTO registrationDTO, PaymentDTO paymentDTO) throws SQLException, ClassNotFoundException, IOException;
 
+    List<Object[]> loadAllRegistrationDetails() throws IOException;
 }

@@ -15,6 +15,7 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class RegistrationBOImpl implements RegistrationBO {
 
@@ -81,6 +82,11 @@ public class RegistrationBOImpl implements RegistrationBO {
         } finally {
             session.close();
         }
+    }
+
+    @Override
+    public List<Object[]> loadAllRegistrationDetails() throws IOException {
+        return registrationDAO.loadAllRegistrationDetails();
     }
 
 }

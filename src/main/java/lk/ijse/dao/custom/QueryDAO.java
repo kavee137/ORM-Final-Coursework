@@ -1,13 +1,10 @@
 package lk.ijse.dao.custom;
 
-import lk.ijse.bo.SuperBO;
-import lk.ijse.dao.CrudDAO;
 import lk.ijse.dao.SuperDAO;
-import lk.ijse.entity.Student;
 
 import java.io.IOException;
 import java.util.List;
 
-public interface StudentDAO extends CrudDAO<Student> {
+public interface QueryDAO extends SuperDAO {
     List<Object[]> studentSearchForPayment(int id) throws IOException;
 }

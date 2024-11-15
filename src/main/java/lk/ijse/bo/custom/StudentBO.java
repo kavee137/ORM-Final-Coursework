@@ -8,6 +8,7 @@ import lk.ijse.entity.Student;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface StudentBO extends SuperBO {
 
@@ -22,5 +23,7 @@ public interface StudentBO extends SuperBO {
     boolean deleteStudent(int id) throws SQLException, ClassNotFoundException, IOException;
 
     Student studentSearch(int id) throws SQLException, ClassNotFoundException;
+
+    List<Object[]> studentSearchForPayment(int id) throws IOException;
 
 }
