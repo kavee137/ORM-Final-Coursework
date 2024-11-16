@@ -68,7 +68,3 @@ Run the main application class to start the project. The application will connec
 ### 6. Additional Configuration
 
 If needed, adjust the settings in `hibernate.properties` according to your environment, such as changing the database connection details.
-
----
-
-This setup should allow for a smooth integration of Hibernate with your project without needing to modify `hibernate.cfg.xml`.
