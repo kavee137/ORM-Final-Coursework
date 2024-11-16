@@ -1,7 +1,3 @@
-Certainly! Here’s an enhanced version of your README file, which includes instructions for setting up the project with Hibernate configuration using a `hibernate.properties` file instead of `hibernate.cfg.xml`.
-
----
-
 # Culinary Academy Management System
 
 This project is a **Hibernate-based Java application** for managing the culinary academy's data. Below are the steps to get started with the project.
