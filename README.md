@@ -38,7 +38,7 @@ hibernate.connection.url=jdbc:mysql://localhost:3306/theCulinaryAcademy?createDa
 
 # Database login credentials
 hibernate.connection.username=root
-hibernate.connection.password=Ijse@123
+hibernate.connection.password=123
 
 # MySQL dialect for Hibernate
 hibernate.dialect=org.hibernate.dialect.MySQLDialect
@@ -50,7 +50,7 @@ hibernate.hbm2ddl.auto=update
 hibernate.show_sql=true
 ```
 
-**Note:** Replace `root` and `Ijse@123` with your actual MySQL username and password if different.
+**Note:** Replace `root` and `123` with your actual MySQL username and password if different.
 
 ### 4. Initial User Setup
 
