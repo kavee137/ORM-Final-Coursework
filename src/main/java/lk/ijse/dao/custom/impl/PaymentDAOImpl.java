@@ -93,4 +93,41 @@ public class PaymentDAOImpl implements PaymentDAO {
 
         return true;
     }
+
+    @Override
+    public String getSumOfTransactionsAmount() {
+        Session session = null;
+        String totalAmount = null;
+        try {
+            // Get the current Hibernate session
+            session = SessionFactoryConfiguration.getInstance().getSession();
+
+            // Begin transaction
+            session.beginTransaction();
+
+            // Use HQL to calculate the sum of the amount column
+            String hql = "SELECT SUM(p.amount) FROM Payment p";
+            Query<Double> query = session.createQuery(hql, Double.class);
+
+            // Get the result
+            Double sum = query.uniqueResult();
+            totalAmount = sum != null ? String.valueOf(sum) : "0.0";
+
+            // Commit transaction
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            if (session != null && session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return totalAmount;
+    }
+
+
+
 }

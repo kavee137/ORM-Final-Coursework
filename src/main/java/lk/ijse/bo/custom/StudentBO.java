@@ -26,4 +26,6 @@ public interface StudentBO extends SuperBO {
 
     List<Object[]> studentSearchForPayment(int id) throws IOException;
 
+    public String getStudentCount() throws SQLException, ClassNotFoundException;
+
 }

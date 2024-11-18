@@ -84,6 +84,40 @@ public class RegistrationDAOImpl implements RegistrationDAO {
         }
     }
 
+    @Override
+    public String getRegistrationCount() {
+        Session session = null;
+        String regCount = null;
+        try {
+            // Get the current Hibernate session
+            session = SessionFactoryConfiguration.getInstance().getSession();
+
+            // Begin transaction
+            session.beginTransaction();
+
+            // Use HQL to get the total count of registrations
+            String hql = "SELECT COUNT(r) FROM Registration r";
+            Query<Long> query = session.createQuery(hql, Long.class);
+
+            // Get the result
+            Long count = query.uniqueResult();
+            regCount = count != null ? String.valueOf(count) : null;
+
+            // Commit transaction
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            if (session != null && session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return regCount;
+    }
+
 
     @Override
     public boolean update(Registration entity) throws SQLException, ClassNotFoundException {

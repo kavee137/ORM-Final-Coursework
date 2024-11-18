@@ -15,4 +15,6 @@ public interface RegistrationBO extends SuperBO {
     boolean saveRegistration(RegistrationDTO registrationDTO, PaymentDTO paymentDTO) throws SQLException, ClassNotFoundException, IOException;
 
     List<Object[]> loadAllRegistrationDetails() throws IOException;
+
+    String getRegistrationCount();
 }

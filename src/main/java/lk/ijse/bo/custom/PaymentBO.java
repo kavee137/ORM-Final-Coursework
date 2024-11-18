@@ -17,4 +17,6 @@ public interface PaymentBO extends SuperBO {
     public ArrayList<PaymentDTO> getPaymentDetails(int regId) throws SQLException, ClassNotFoundException, IOException;
 
     boolean savePayment(PaymentDTO paymentDTO, RegistrationDTO registrationDTO) throws SQLException, ClassNotFoundException, IOException;
+
+    String getSumOfTransactionsAmount();
 }

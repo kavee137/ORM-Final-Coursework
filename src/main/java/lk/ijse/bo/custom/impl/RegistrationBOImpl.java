@@ -89,4 +89,9 @@ public class RegistrationBOImpl implements RegistrationBO {
         return registrationDAO.loadAllRegistrationDetails();
     }
 
+    @Override
+    public String getRegistrationCount() {
+        return registrationDAO.getRegistrationCount();
+    }
+
 }

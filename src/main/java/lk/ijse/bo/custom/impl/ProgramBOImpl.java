@@ -56,4 +56,9 @@ public class ProgramBOImpl implements ProgramBO {
     public Program searchByName(String name) throws SQLException, ClassNotFoundException {
         return programDAO.searchByName(name);
     }
+
+    @Override
+    public String getProgramCount() {
+        return programDAO.getProgramCount();
+    }
 }

@@ -56,4 +56,9 @@ public class StudentBOImpl implements StudentBO {
     public List<Object[]> studentSearchForPayment(int id) throws IOException {
         return studentDAO.studentSearchForPayment(id);
     }
+
+    @Override
+    public String getStudentCount() throws SQLException, ClassNotFoundException {
+        return studentDAO.getStudentCount();
+    }
 }

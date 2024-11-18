@@ -5,7 +5,6 @@ import lk.ijse.dao.DAOFactory;
 import lk.ijse.dao.custom.QueryDAO;
 import lk.ijse.dao.custom.StudentDAO;
 import lk.ijse.entity.Student;
-import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
@@ -142,4 +141,41 @@ public class StudentDAOImpl implements StudentDAO {
     public List<Object[]> studentSearchForPayment(int id) throws IOException {
         return queryDAO.studentSearchForPayment(id);
     }
+
+    @Override
+    public String getStudentCount() {
+        Session session = null;
+        String studentCount = null;
+        try {
+            // Get the current Hibernate session
+            session = SessionFactoryConfiguration.getInstance().getSession();
+
+            // Begin transaction
+            session.beginTransaction();
+
+            // Use HQL to get the total count of students
+            String hql = "SELECT COUNT(s) FROM Student s";
+            Query<Long> query = session.createQuery(hql, Long.class);
+
+            // Get the result
+            Long count = query.uniqueResult();
+            studentCount = count != null ? String.valueOf(count) : null;
+
+            // Commit transaction
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            if (session != null && session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return studentCount;
+    }
+
+
+
 }

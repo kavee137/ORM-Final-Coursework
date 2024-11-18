@@ -15,4 +15,6 @@ public interface RegistrationDAO extends CrudDAO<Registration> {
     boolean saveRegistration(Registration registration, Session session) throws SQLException, ClassNotFoundException, IOException;
 
     boolean updateAmount(Registration registration, Session session);
+
+    String getRegistrationCount();
 }

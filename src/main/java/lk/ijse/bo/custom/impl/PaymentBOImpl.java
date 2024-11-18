@@ -100,4 +100,9 @@ public class PaymentBOImpl implements PaymentBO {
         }
     }
 
+    @Override
+    public String getSumOfTransactionsAmount() {
+        return paymentDAO.getSumOfTransactionsAmount();
+    }
+
 }

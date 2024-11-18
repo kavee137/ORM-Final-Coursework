@@ -28,4 +28,5 @@ public interface ProgramBO extends SuperBO {
     // this method for registration UI
     Program searchByName(String name) throws SQLException, ClassNotFoundException;
 
+    String getProgramCount();
 }

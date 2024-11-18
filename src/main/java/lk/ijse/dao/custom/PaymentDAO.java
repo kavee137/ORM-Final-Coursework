@@ -16,4 +16,6 @@ public interface PaymentDAO extends CrudDAO<Payment> {
     public ArrayList<Payment>  getDataUsingRegId(int regId) throws SQLException, ClassNotFoundException, IOException;
 
     public boolean savePayment(Payment payment, Session session) throws SQLException, ClassNotFoundException, IOException;
+
+    String getSumOfTransactionsAmount();
 }

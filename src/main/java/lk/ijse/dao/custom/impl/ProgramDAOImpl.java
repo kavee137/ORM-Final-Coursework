@@ -159,5 +159,39 @@ public class ProgramDAOImpl implements ProgramDAO {
         return program;
     }
 
+    @Override
+    public String getProgramCount() {
+        Session session = null;
+        String programCount = null;
+        try {
+            // Get the current Hibernate session
+            session = SessionFactoryConfiguration.getInstance().getSession();
+
+            // Begin transaction
+            session.beginTransaction();
+
+            // Use HQL to get the total count of programs
+            String hql = "SELECT COUNT(p) FROM Program p";
+            Query<Long> query = session.createQuery(hql, Long.class);
+
+            // Get the result
+            Long count = query.uniqueResult();
+            programCount = count != null ? String.valueOf(count) : null;
+
+            // Commit transaction
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            if (session != null && session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return programCount;
+    }
+
 
 }
