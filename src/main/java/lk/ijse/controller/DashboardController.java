@@ -25,7 +25,6 @@ public class DashboardController {
     @FXML
     private JFXButton btnPayment;
 
-
     @FXML
     private JFXButton btnDashboard;
 
@@ -35,22 +34,22 @@ public class DashboardController {
     @FXML
     private JFXButton btnPrograms;
 
-    int userId = UserSession.getInstance().getUserId();
+    @FXML
+    private JFXButton btnRegistration;
+
+    @FXML
+    private JFXButton btnStudent;
+
+
     String role = UserSession.getInstance().getRole();
 
 
     // Initialize method to load the main dashboard after a delay
     public void initialize() {
-//         Load mainDashboard_form.fxml after a 1-second delay
+        // Load mainDashboard_form.fxml after a 1-second delay
         PauseTransition delay = new PauseTransition(Duration.seconds(0.0001));
         delay.setOnFinished(event -> loadMainDashboard());
         delay.play();
-
-//        dButton.setStyle("-fx-background-color: #192a51");
-
-        // Set action listeners for each button in the VBox
-//        setButtonActions();
-
 
         checkLoggedUser();
     }
@@ -61,8 +60,14 @@ public class DashboardController {
             btnUser.setVisible(false);
             btnPrograms.setVisible(false);
         }
+        if (role.equals("tempory_user")){
+            btnPrograms.setVisible(false);
+            btnDashboard.setVisible(false);
+            btnPayment.setVisible(false);
+            btnRegistration.setVisible(false);
+            btnStudent.setVisible(false);
+        }
     }
-
 
 
     // Method to load the main dashboard
@@ -82,10 +87,6 @@ public class DashboardController {
         }
     }
 
-
-
-
-
     @FXML
     void btnDashboardOnAction(ActionEvent event) throws IOException {
         FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/view/analytics_dashboard.fxml"));
@@ -95,9 +96,6 @@ public class DashboardController {
 
         Stage stage = (Stage) rootNode.getScene().getWindow();
         stage.setTitle("Dashboard");
-
-
-
     }
 
     @FXML
@@ -110,7 +108,6 @@ public class DashboardController {
         stage.setScene(scene);
         stage.setTitle("The Culinary Academy");
     }
-
 
     @FXML
     void btnProgramsOnAction(ActionEvent event) throws IOException {
