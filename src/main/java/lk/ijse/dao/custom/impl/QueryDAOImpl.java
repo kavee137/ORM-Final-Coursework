@@ -2,12 +2,12 @@ package lk.ijse.dao.custom.impl;
 
 import lk.ijse.config.SessionFactoryConfiguration;
 import lk.ijse.dao.custom.QueryDAO;
-import lk.ijse.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,4 +46,29 @@ public class QueryDAOImpl implements QueryDAO {
         }
         return results;
     }
+
+    @Override
+    public List<Object[]> getPieChart2Details() throws IOException {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            String hql = "SELECT p.programId, p.programName, COUNT(DISTINCT r.student.studentId) FROM Program p JOIN p.registrations r GROUP BY p.programId, p.programName";
+
+            Query<Object[]> query = session.createQuery(hql, Object[].class);
+            List<Object[]> results = query.list(); // Fetch the results
+            transaction.commit();
+            return results;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
+
 }

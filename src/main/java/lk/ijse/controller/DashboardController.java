@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.entity.UserSession;
@@ -15,6 +16,15 @@ import lk.ijse.entity.UserSession;
 import java.io.IOException;
 
 public class DashboardController {
+
+    @FXML
+    private Text lblUserName;
+
+    @FXML
+    private Text lblPosition;
+
+    @FXML
+    private Text lblHello;
 
     @FXML
     private AnchorPane nodePane;
@@ -52,13 +62,28 @@ public class DashboardController {
         delay.play();
 
         checkLoggedUser();
+        btnDashboard.setStyle("-fx-background-color: #edf2fb;");
     }
+
+
+    // Method to reset the style of all buttons
+    private void resetButtonStyles() {
+        btnPayment.setStyle("");
+        btnDashboard.setStyle("");
+        btnUser.setStyle("");
+        btnPrograms.setStyle("");
+        btnRegistration.setStyle("");
+        btnStudent.setStyle("");
+    }
+
 
 
     void checkLoggedUser() {
         if (role.equals("admissions coordinator")){
             btnUser.setVisible(false);
             btnPrograms.setVisible(false);
+            lblPosition.setText("Admission coordinator");
+            return;
         }
         if (role.equals("tempory_user")){
             btnPrograms.setVisible(false);
@@ -66,6 +91,10 @@ public class DashboardController {
             btnPayment.setVisible(false);
             btnRegistration.setVisible(false);
             btnStudent.setVisible(false);
+            lblPosition.setText("Tempory User");
+        }
+        if (role.equals("admin")){
+            lblPosition.setText("Admin");
         }
     }
 
@@ -89,6 +118,11 @@ public class DashboardController {
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) throws IOException {
+
+        resetButtonStyles(); // Reset styles for all buttons
+        btnDashboard.setStyle("-fx-background-color: #edf2fb;"); // Set style for the clicked button
+
+
         FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/view/analytics_dashboard.fxml"));
         Parent productRoot = productLoader.load();
         rootNode.getChildren().clear();
@@ -111,6 +145,10 @@ public class DashboardController {
 
     @FXML
     void btnProgramsOnAction(ActionEvent event) throws IOException {
+
+        resetButtonStyles(); // Reset styles for all buttons
+        btnPrograms.setStyle("-fx-background-color: #edf2fb;"); // Set style for the clicked button
+
         FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/view/programs_form.fxml"));
         Parent productRoot = productLoader.load();
         rootNode.getChildren().clear();
@@ -122,6 +160,10 @@ public class DashboardController {
 
     @FXML
     void btnRegistrationOnAction(ActionEvent event) throws IOException {
+
+        resetButtonStyles(); // Reset styles for all buttons
+        btnRegistration.setStyle("-fx-background-color: #edf2fb;"); // Set style for the clicked button
+
         FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/view/registration_form.fxml"));
         Parent productRoot = productLoader.load();
         rootNode.getChildren().clear();
@@ -133,6 +175,11 @@ public class DashboardController {
 
     @FXML
     void btnStudentsOnAction(ActionEvent event) throws IOException {
+
+        resetButtonStyles(); // Reset styles for all buttons
+        btnStudent.setStyle("-fx-background-color: #edf2fb;"); // Set style for the clicked button
+
+
         FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/view/student_form.fxml"));
         Parent productRoot = productLoader.load();
         rootNode.getChildren().clear();
@@ -144,6 +191,10 @@ public class DashboardController {
 
     @FXML
     void btnUser(ActionEvent event) throws IOException {
+
+        resetButtonStyles(); // Reset styles for all buttons
+        btnUser.setStyle("-fx-background-color: #edf2fb;"); // Set style for the clicked button
+
         FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/view/user_form.fxml"));
         Parent productRoot = productLoader.load();
         rootNode.getChildren().clear();
@@ -155,6 +206,10 @@ public class DashboardController {
 
     @FXML
     void btnPaymentsOnAction(ActionEvent event) throws IOException {
+
+        resetButtonStyles(); // Reset styles for all buttons
+        btnPayment.setStyle("-fx-background-color: #edf2fb;"); // Set style for the clicked button
+
         FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/view/payment_form.fxml"));
         Parent productRoot = productLoader.load();
         rootNode.getChildren().clear();
